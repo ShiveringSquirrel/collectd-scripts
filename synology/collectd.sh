@@ -83,10 +83,14 @@ snmp_simple_native() {
     SNMP_NODE=$3
 
     value=$(fetch_snmp "$SNMP_NODE")
-    value=$(to_int "$value")
+    
+    if [ "$value" != "No Such Instance currently exists at this OID" ]; then
+        #echo "$value"
+        value=$(to_int "$value")
 
-    if [[ "$value" != "" ]]; then
-        collectd_native "$MAIN_NODE" "$STATS_NODE" "$value"
+        if [[ "$value" != "" ]]; then
+                collectd_native "$MAIN_NODE" "$STATS_NODE" "$value"
+        fi
     fi
 }
 
