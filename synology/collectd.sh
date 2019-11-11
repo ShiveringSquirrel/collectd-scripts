@@ -44,7 +44,8 @@ search_snmp_id() {
 }
 
 to_int() {
-        printf '%.*f' 0 "$1"
+	TMP=`echo "$1" | awk '{print $1}'`
+        printf '%.*f' 0 "$TMP"
 }
 
 to_float() {
